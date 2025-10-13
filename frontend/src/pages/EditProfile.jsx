@@ -27,22 +27,30 @@ function EditProfile() {
      const updateProfile = async () => {
       setLoading(true)
       try {
-        const result = await axios.post(serverUrl + "/api/user/updateprofile" ,formData , {withCredentials:true} )
+        // Make sure we're only sending the file if it exists
+        if (!photoUrl) {
+          formData.delete("photoUrl");
+        }
+        
+        const result = await axios.post(serverUrl + "/api/user/updateprofile", formData, {withCredentials:true})
         console.log(result.data)
-        dispatch(setUserData(result.data))
-        navigate("/")
-        setLoading(false)
-      
-        toast.success("Profile Update Successfully")
         
-
+        // After updating profile, fetch the latest user data
+        const userResponse = await axios.get(`${serverUrl}/api/user/currentuser`, {
+          withCredentials: true
+        });
         
+        if (userResponse.data) {
+          dispatch(setUserData(userResponse.data));
+          toast.success("Profile Updated Successfully");
+          navigate("/profile");
+        }
       } catch (error) {
         console.log(error)
-        toast.error("Profile Update Error")
+        toast.error(error.response?.data?.message || "Profile Update Error")
+      } finally {
         setLoading(false)
       }
-      
      }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4 py-10">
