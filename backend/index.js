@@ -27,10 +27,22 @@ let port = process.env.PORT
 let app = express()
 app.use(express.json())
 app.use(cookieParser())
+const allowedOrigins = [
+    "https://indraprasth-demo-frontend.onrender.com",
+    "http://localhost:5173" // add your dev frontend URL
+];
+
 app.use(cors({
-    origin: "https://indraprasth-demo-frontend.onrender.com",
+    origin: function(origin, callback) {
+        if (!origin) return callback(null, true); // allow non-browser requests
+        if (allowedOrigins.indexOf(origin) === -1) {
+            return callback(new Error("CORS policy does not allow access from this origin"), false);
+        }
+        return callback(null, true);
+    },
     credentials: true
-}))
+}));
+
 // Serve static files from uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')))
 
