@@ -48,7 +48,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')))
 
 app.use("/api/auth", authRouter)
 app.use("/api/user", userRouter)
-app.use("/api/course", courseRouter)
+// app.use("/api/course", courseRouter)
 
 // app.use("/api/ai", aiRouter)
 
