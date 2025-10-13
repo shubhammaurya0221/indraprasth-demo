@@ -44,10 +44,10 @@ import CreateLecture from "./pages/admin/CreateLecture";
 import EditLecture from "./pages/admin/EditLecture";
 
 // Hooks
-import useGetCurrentUser from "./customHooks/getCurrentUser";
-import getCouseData from "./customHooks/getCouseData";
-import getCreatorCourseData from "./customHooks/getCreatorCourseData";
-import getAllReviews from "./customHooks/getAllReviews";
+// import useGetCurrentUser from "./customHooks/getCurrentUser";
+// import getCouseData from "./customHooks/getCouseData";
+// import getCreatorCourseData from "./customHooks/getCreatorCourseData";
+// import getAllReviews from "./customHooks/getAllReviews";
 
 // Components
 import ScrollToTop from "./components/ScrollToTop";
@@ -65,10 +65,10 @@ function App() {
   };
   
   // Call hooks directly - they handle their own useEffect internally
-  useGetCurrentUser();
-  getCouseData();
-  getCreatorCourseData();
-  getAllReviews();
+  // useGetCurrentUser();
+  // getCouseData();
+  // getCreatorCourseData();
+  // getAllReviews();
 
   return (
     <SidebarProvider>
