@@ -38,7 +38,7 @@ function Nav() {
     <div>
     <div className='w-[100%] h-[70px] fixed top-0 px-[20px] py-[10px] flex items-center justify-between bg-[#00000047] z-10'>
       {/* Logo section */}
-      <div className='lg:w-[20%] w-[40%] lg:pl-[50px] relative'> 
+      <div className='lg:w-[20%] w-[40%] lg:pl-[75px] ml-10 md:ml-4 relative'> 
         <img
           src={companylogo}
           className='w-[50px] h-[50px] rounded-full border-2 border-white cursor-pointer object-cover'
@@ -50,10 +50,10 @@ function Nav() {
       {/* Navigation controls */}
       <div className='flex items-center justify-end gap-3'>
         {/* Mobile hamburger menu */}
-        <GiHamburgerMenu 
+        {/* <GiHamburgerMenu 
           className='w-[30px] h-[30px] lg:hidden fill-white cursor-pointer' 
           onClick={() => setShowHam(prev => !prev)}
-        />
+        /> */}
         
         {/* Profile/Login section */}
         <div className='flex items-center gap-3'>
