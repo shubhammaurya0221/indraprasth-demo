@@ -28,7 +28,7 @@ let app = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: "https://indraprasth-demo-frontend.onrender.com/",
+    origin: "https://indraprasth-demo-frontend.onrender.com",
     credentials: true
 }))
 // Serve static files from uploads directory
