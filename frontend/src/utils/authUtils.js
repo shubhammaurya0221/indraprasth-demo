@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const serverUrl = "https://indraprashta.onrender.com";
+const serverUrl = "https://indraprasth-demo.onrender.com";
 
 /**
  * Logout utility function that clears authentication and redirects
