@@ -139,7 +139,7 @@ function Profile() {
       <div className="min-h-screen bg-gray-900 px-4 py-10 flex items-center justify-center">
         <div className="bg-gray-800 shadow-lg rounded-2xl p-8 max-w-6xl w-full text-center">
           <h2 className="text-2xl font-bold text-gray-100 mb-4">Welcome!</h2>
-          <p className="text-gray-300 mb-6">You have successfully submitted today's MCQ!</p>
+        
           <p className="text-gray-400">Please wait while we load your profile data...</p>
           <button 
             onClick={fetchUserData}
@@ -159,9 +159,9 @@ function Profile() {
         
         {/* Success message after MCQ submission */}
         {userData && (
-          <div className="mb-6 p-4 bg-green-900 border border-green-700 rounded-lg">
+          <div className="mb-6 p-4  rounded-lg">
             <p className="text-green-200 text-center font-medium">
-              Welcome, {userData.name}! You have successfully submitted today's MCQ!
+              Welcome, {userData.name}! 
             </p>
           </div>
         )}
