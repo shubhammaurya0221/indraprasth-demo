@@ -24,25 +24,14 @@ dotenv.config()
 
 let port = process.env.PORT
 let app = express()
-const allowedOrigins = process.env.NODE_ENV === 'production'
-  ? ["https://indraprasth-demo-frontend.onrender.com"]
-  : [
-      "http://localhost:5173",
-      "http://localhost:5174",
-      "http://localhost:5175"
-    ];
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true
-}));
+    origin: process.env.NODE_ENV === 'production' 
+        ? [process.env.FRONTEND_URL, "https://lms-frontend.vercel.app"]
+        : ["http://localhost:5173", "http://localhost:5174", "http://localhost:5175"],
+    credentials: true
+}))
 // Serve static files from uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')))
 
