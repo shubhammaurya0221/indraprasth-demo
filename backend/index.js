@@ -5,7 +5,7 @@ import authRouter from "./routes/authRoute.js"
 import cookieParser from "cookie-parser"
 import cors from "cors"
 import userRouter from "./routes/userRoute.js"
-import courseRouter from "./routes/courseRoute.js"
+
 
 
 import testRouter from "./routes/testRoute.js"
@@ -48,7 +48,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')))
 
 app.use("/api/auth", authRouter)
 app.use("/api/user", userRouter)
-app.use("/api/course", courseRouter)
+
 
 // app.use("/api/ai", aiRouter)
 
