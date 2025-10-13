@@ -28,9 +28,7 @@ let app = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production' 
-        ? [process.env.FRONTEND_URL, "https://lms-frontend.vercel.app"]
-        : ["http://localhost:5173", "http://localhost:5174", "http://localhost:5175","https://indraprashta-frontend.onrender.com"],
+    origin: "https://indraprasth-demo-frontend.onrender.com/",
     credentials: true
 }))
 // Serve static files from uploads directory
