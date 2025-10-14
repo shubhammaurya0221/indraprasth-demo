@@ -243,25 +243,25 @@ function Profile() {
         )
          */}
         {/* Tab Navigation */}
-        <div className="flex justify-center mb-8">
-          <div className="flex -space-x-0.5 bg-gray-800 p-1 rounded-lg">
+        <div className="flex justify-center mb-8 ">
+          <div className="flex -space-x-3  p-1 rounded-lg">
             <button
               onClick={() => setActiveTab('profile')}
               className={`px-6 py-2 rounded-md font-medium transition-colors ${
                 activeTab === 'profile'
-                  ? 'bg-gray-900 text-white'
-                  : 'text-gray-300 hover:bg-gray-700'
+                  ? 'text-white'
+                  : 'text-gray-300'
               }`}
             >
-              Profile
+              Profile Data
             </button>
             {userData && userData.role === 'student' && (
               <button
                 onClick={() => setActiveTab('mcq-results')}
                 className={`px-6 py-2 rounded-md font-medium transition-colors ${
                   activeTab === 'mcq-results'
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-300 hover:bg-gray-700'
+                    ? ' text-white'
+                    : 'text-gray-300'
                 }`}
               >
                 MCQ Results
@@ -272,8 +272,8 @@ function Profile() {
                 onClick={() => setActiveTab('question-results')}
                 className={`px-6 py-2 rounded-md font-medium transition-colors ${
                   activeTab === 'question-results'
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-300 hover:bg-gray-700'
+                    ? ' text-white'
+                    : 'text-gray-300'
                 }`}
               >
                 Question Results
@@ -284,8 +284,8 @@ function Profile() {
                 onClick={() => setActiveTab('results')}
                 className={`px-6 py-2 rounded-md font-medium transition-colors ${
                   activeTab === 'results'
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-300 hover:bg-gray-700'
+                    ? ' text-white'
+                    : 'text-gray-300 '
                 }`}
               >
                 Test Results
