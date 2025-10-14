@@ -14,6 +14,8 @@ const isAuth = async (req, res, next) => {
         message: "Access denied. Token missing or invalid format.",
       });
     }
+    console.log("Received token:", req.cookies?.token, typeof req.cookies?.token);
+
 
     // Verify token
     let decoded;
