@@ -3,10 +3,8 @@ import User from "../models/userModel.js";
 
 const isAuth = async (req, res, next) => {
   try {
-    // Extract token from cookies
     const { token } = req.cookies;
 
-    // Validate token presence and type
     if (!token || typeof token !== "string") {
       console.warn("Auth failed: Token missing or not a string");
       return res.status(401).json({
@@ -14,10 +12,9 @@ const isAuth = async (req, res, next) => {
         message: "Access denied. Token missing or invalid format.",
       });
     }
-    console.log("Received token:", req.cookies?.token, typeof req.cookies?.token);
 
+    console.log("Received token:", token);
 
-    // Verify token
     let decoded;
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -29,8 +26,7 @@ const isAuth = async (req, res, next) => {
       });
     }
 
-    // Fetch user and attach to request
-    const user = await User.findById(decoded.userId).select("-password");
+    const user = await User.findById(decoded._id).select("-password");
     if (!user) {
       console.warn("Auth failed: User not found");
       return res.status(401).json({
@@ -39,7 +35,7 @@ const isAuth = async (req, res, next) => {
       });
     }
 
-    req.userId = decoded.userId;
+    req.userId = decoded._id;
     req.user = user;
     next();
   } catch (error) {
