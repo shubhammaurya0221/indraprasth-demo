@@ -34,18 +34,10 @@ const allowedOrigins =
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 
 // ✅ Static file serving
 app.use("/uploads", express.static(path.join(__dirname, "public", "uploads")));
