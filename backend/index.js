@@ -23,17 +23,18 @@ const port = process.env.PORT || 5000;
 const app = express();
 
 // ✅ CORS setup
-const allowedOrigins =
-  process.env.NODE_ENV === "production"
-    ? ["https://indraprasth-demo-frontend.onrender.com"]
-    : [
-        "http://localhost:5173",
-        "http://localhost:5174",
-        "http://localhost:5175",
-      ];
+// Define allowed origins
+const allowedOrigins = [
+  "https://indraprasth-demo-frontend.onrender.com",
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:5175"
+];
 
+// Middleware
 app.use(express.json());
 app.use(cookieParser());
+
 app.use(cors({
   origin: allowedOrigins,
   credentials: true
