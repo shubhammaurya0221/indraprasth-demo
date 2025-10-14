@@ -244,7 +244,7 @@ function Profile() {
          */}
         {/* Tab Navigation */}
         <div className="flex justify-center mb-8">
-          <div className="flex space-x-1 bg-gray-800 p-1 rounded-lg">
+          <div className="flex -space-x-0.5 bg-gray-800 p-1 rounded-lg">
             <button
               onClick={() => setActiveTab('profile')}
               className={`px-6 py-2 rounded-md font-medium transition-colors ${
