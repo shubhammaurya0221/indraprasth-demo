@@ -81,34 +81,51 @@ export const signUp = async (req, res) => {
 };
 
 // ======================= LOGIN =======================
+const genToken = (userId, role) => {
+  return jwt.sign(
+    { _id: userId, role },
+    process.env.JWT_SECRET,
+    { expiresIn: "7d" }
+  );
+};
+
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    // Find user
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: "User does not exist" });
+    if (!user) {
+      return res.status(400).json({ message: "User does not exist" });
+    }
 
+    // Verify password
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Incorrect password" });
+    if (!isMatch) {
+      return res.status(400).json({ message: "Incorrect password" });
+    }
 
+    // Generate JWT token
     const token = genToken(user._id, user.role);
 
+    // Set cookie securely
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === "production", // true on Render
       sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
 
+    // Send user data
     return res.status(200).json({
       _id: user._id,
       name: user.name,
       email: user.email,
       role: user.role,
-      photoUrl: user.photoUrl,
+      photoUrl: user.photoUrl
     });
   } catch (error) {
-    console.error("login error:", error);
+    console.error("Login error:", error);
     return res.status(500).json({ message: `Login Error: ${error.message}` });
   }
 };
