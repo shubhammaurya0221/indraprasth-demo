@@ -57,7 +57,7 @@ export const signUp = async (req, res) => {
     });
 
     // Generate token
-    const token = genToken(user._id, user.role);
+    
 
     // Set cookie
     res.cookie("token", token, {
