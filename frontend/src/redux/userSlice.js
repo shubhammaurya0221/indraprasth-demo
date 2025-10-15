@@ -1,23 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
-  userData: null,
-  loading: true // used to delay route rendering until auth check completes
-};
-
-const userSlice = createSlice({
-  name: "user",
-  initialState,
-  reducers: {
-    setUserData: (state, action) => {
-      state.userData = action.payload;
-    },
-    setLoading: (state, action) => {
-      state.loading = action.payload;
+const userSlice=createSlice({
+    name:"user",
+    initialState:{
+        userData:null
+    },//setUserData("ankush")<={payload}
+    reducers:{
+        setUserData:(state,action)=>{
+        state.userData=action.payload
+        }
     }
-  }
-});
+})
 
-export const { setUserData, setLoading } = userSlice.actions;
-export default userSlice.reducer;
-
+export const {setUserData}=userSlice.actions
+export default userSlice.reducer
