@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { SidebarProvider } from "./contexts/SidebarContext";
 import Layout from "./components/Layout";
-import useGetCurrentUser from "./customHooks/useGetCurrentUser";
 
 // Pages
 import Home from "./pages/Home";
@@ -59,7 +58,7 @@ export const serverUrl = import.meta.env.VITE_SERVER_URL || "http://localhost:80
 
 function App() {
   const { userData } = useSelector((state) => state.user);
-   useGetCurrentUser();
+  
   // Custom ProtectedRoute component for basic authentication
   const SimpleProtectedRoute = ({ children }) => {
     return userData ? children : <Navigate to="/login" />;
