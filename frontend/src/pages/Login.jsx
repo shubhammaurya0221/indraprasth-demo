@@ -10,6 +10,7 @@ import { ClipLoader } from 'react-spinners';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../redux/userSlice';
 import companylogo from "../assets/companylogo.jpg";
+import { auth, provider } from '../utils/firebase';
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -42,31 +43,38 @@ function Login() {
     }
   };
 
-  const googleLogin = async () => {
-    try {
-      const response = await signInWithPopup(auth, provider);
-      const user = response.user;
-      const name = user.displayName;
-      const email = user.email;
-      const role = "";
+ const googleLogin = async () => {
+  try {
+    const response = await signInWithPopup(auth, provider);
+    const user = response.user;
 
-      const result = await axios.post(
-        serverUrl + "/api/auth/googlesignup",
-        { name, email, role },
-        { withCredentials: true }
-      );
-      dispatch(setUserData(result.data));
+    const name = user.displayName;
+    const email = user.email;
+    const role = ""; // optional: set default role if needed
 
-      // Replace login with home, then push pyq-bundles
-      navigate("/", { replace: true });
-      navigate("/pyq-bundles");
+    const result = await axios.post(
+      `${serverUrl}/api/auth/googlesignup`,
+      { name, email, role },
+      { withCredentials: true }
+    );
 
-      toast.success("Login Successfully");
-    } catch (error) {
-      console.log(error);
+    // ✅ Use res.data.user if backend wraps it
+    const userData = result.data?.user || result.data;
+    dispatch(setUserData(userData));
+
+    toast.success("Login Successfully");
+
+    // ✅ Avoid double navigation
+    navigate("/pyq-bundles", { replace: true });
+  } catch (error) {
+    if (error.code === "auth/popup-closed-by-user") {
+      toast.info("Google login was cancelled");
+    } else {
+      console.error("Google login error:", error);
       toast.error(error.response?.data?.message || "Google login failed");
     }
-  };
+  }
+};
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4'>
