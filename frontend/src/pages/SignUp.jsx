@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { setUserData } from '../redux/userSlice'
 import companylogo from "../assets/companylogo.jpg"
-import { auth, provider } from '../utils/firebase';
+import { auth, provider } from '../utils/Firebase';
 
 function SignUp() {
     const [name, setName] = useState("")
