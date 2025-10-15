@@ -10,7 +10,7 @@ import { ClipLoader } from 'react-spinners';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../redux/userSlice';
 import companylogo from "../assets/companylogo.jpg";
-import { auth, provider } from '../utils/Firebase';
+import { auth, provider } from '../utils/firebase';
 
 function Login() {
   const [email, setEmail] = useState("");
