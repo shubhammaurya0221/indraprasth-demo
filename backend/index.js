@@ -22,8 +22,7 @@ dotenv.config();
 const port = process.env.PORT || 5000;
 const app = express();
 
-// ✅ CORS setup
-// Define allowed origins
+// ✅ Define allowed origins
 const allowedOrigins = [
   "https://indraprasth-demo-frontend.onrender.com",
   "http://localhost:5173",
@@ -31,14 +30,21 @@ const allowedOrigins = [
   "http://localhost:5175"
 ];
 
-// Middleware
-app.use(express.json());
-app.use(cookieParser());
-
+// ✅ CORS middleware with dynamic origin check
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
+
+// ✅ Middleware
+app.use(express.json());
+app.use(cookieParser());
 
 // ✅ Static file serving
 app.use("/uploads", express.static(path.join(__dirname, "public", "uploads")));
