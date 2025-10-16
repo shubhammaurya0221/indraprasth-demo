@@ -65,7 +65,7 @@ function Login() {
     toast.success("Login Successfully");
 
     // ✅ Avoid double navigation
-    navigate("/pyq-bundles", { replace: true });
+    navigate("/", { replace: true });
   } catch (error) {
     if (error.code === "auth/popup-closed-by-user") {
       toast.info("Google login was cancelled");
