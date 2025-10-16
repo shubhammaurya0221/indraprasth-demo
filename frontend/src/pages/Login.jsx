@@ -65,7 +65,7 @@ function Login() {
     toast.success("Login Successfully");
 
     // ✅ Avoid double navigation
-    navigate("/", { replace: true });
+  navigate("/")
   } catch (error) {
     if (error.code === "auth/popup-closed-by-user") {
       toast.info("Google login was cancelled");
